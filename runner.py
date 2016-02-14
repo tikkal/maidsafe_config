@@ -16,6 +16,7 @@ def cargo_test(project, use_mock_routing=False):
   cargo_exec(cargo_args, project)
 
 def do_runner():
+  # Projects that require mock routing
   projects = [
     "accumulator",
     "drive",
@@ -31,11 +32,19 @@ def do_runner():
     "safe_ffi",
     "safe_launcher",
     "self_encryption",
-    "safe_launcher",
     "safe_dns",
+    "safe_launcher",
     "safe_nfs safe_core", 
     "xor_name"
   ]
+  mock_routing_projects = [
+    "safe_dns",
+    "safe_launcher"
+  ]
   for (project in projects):
-    cargo_test(project)
+    mock_routing = project in mock_routing_projects
+    cargo_test(project, use_mock_routing=mock_routing)
+
+do_runner()
+
 

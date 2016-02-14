@@ -3,18 +3,12 @@ function ct {
   pushd $1
   if [[ $1 == "safe_launcher" ]]; then
     cargo test --features "use-mock-routing"
+  elif [[ $1 == "safe_ffi" ]]; then
+    cargo test --features "use-mock-routing"
+  elif [[ $1 == "safe_dns" ]]; then
+    cargo test --features "use-mock-routing"
   else
     cargo test
-  fi
-  popd
-}
-
-function cb { 
-  pushd $1
-  if [[ $1 == "safe_launcher" ]]; then
-    cargo build --features "use-mock-routing"
-  else
-    cargo build
   fi
   popd
 }
