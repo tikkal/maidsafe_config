@@ -1,5 +1,10 @@
 #!/usr/bin/python
 
+# Note, in your .bashrc, put: 
+#  export SODIUM_LIB_DIR=/usr/local/lib
+#  export RUST_TEST_THREADS=1
+# See maidsafe forums for info re. installing libsodium.
+
 import subprocess
 import sys
 
