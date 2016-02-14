@@ -8,9 +8,9 @@
 import subprocess
 import sys
 
-def cargo_exec(project, cargo_args):
+def call_with_cwd(project, exec_args):
   # Use Popen to set directory in project
-  p = subprocess.Popen(cargo_args, cwd=project)
+  p = subprocess.Popen(exec_args, cwd=project)
   p.wait()
   
 def cargo_build_or_test(project, build_or_test, use_mock_routing=False):
@@ -20,7 +20,7 @@ def cargo_build_or_test(project, build_or_test, use_mock_routing=False):
   if (use_mock_routing): 
     cargo_args.extend(["--features", "use-mock-routing"])
 
-  cargo_exec(project, cargo_args)
+  call_with_cwd(project, cargo_args)
 
 def do_runner(option):
   projects = [
@@ -53,16 +53,18 @@ def do_runner(option):
       mock_routing = project in mock_routing_projects
       cargo_build_or_test(project, option, use_mock_routing=mock_routing)
     elif option == "clean":
-      cargo_exec(project, ["cargo", "clean"])
+      call_with_cwd(project, ["cargo", "clean"])
     elif option == "clone":
       url = "https://github.com/maidsafe/" + project + ".git"
       subprocess.call(["git", "clone", url])
+    elif option == "pull":
+      call_with_cwd(project, ["git", "pull"])
     elif option == "update":
-      cargo_exec(project, ["cargo", "update"])
+      call_with_cwd(project, ["cargo", "update"])
 
 # Check for a few simple command line args.
 if len(sys.argv) != 2:
-  print "Please specify one of: build, test, clean, clone, update"
+  print "Please specify one of: build, clean, clone, pull, test, update"
 else: 
   do_runner(sys.argv[1])
 
