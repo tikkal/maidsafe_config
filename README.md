@@ -1,5 +1,3 @@
 # maidsafe_config
 
-execute 
-$ ./runner.py 
-to see options
+Run the script with no arguments to see options.
