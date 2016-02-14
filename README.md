@@ -7,4 +7,4 @@ You'll want to set these in your .bashrc:
 
 Run the script with no arguments to see the options.
 
-
+./runner.py
