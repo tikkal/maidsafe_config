@@ -23,7 +23,6 @@ def cargo_build_or_test(project, build_or_test, use_mock_routing=False):
   cargo_exec(project, cargo_args)
 
 def do_runner(option):
-  # Projects that require mock routing
   projects = [
     "accumulator",
     "crust",
