@@ -8,8 +8,8 @@ def cargo_exec(project, cargo_args):
   p = subprocess.Popen(cargo_args, cwd=project)
   p.wait()
   
-def cargo_test(project, use_mock_routing=False):
-  cargo_args = ["cargo", "test"]
+def cargo_build_or_test(project, build_or_test, use_mock_routing=False):
+  cargo_args = ["cargo", build_or_test]
 
   # Add mock routing feature if specified
   if (use_mock_routing): 
@@ -17,7 +17,7 @@ def cargo_test(project, use_mock_routing=False):
 
   cargo_exec(project, cargo_args)
 
-def do_runner(cleaning=False, cloning=False):
+def do_runner(option):
   # Projects that require mock routing
   projects = [
     "accumulator",
@@ -44,20 +44,19 @@ def do_runner(cleaning=False, cloning=False):
     "safe_launcher"
   ]
   for project in projects:
-    if cleaning:
-      print "cleaning " + project
+    print option + "ing " + project
+    if option == "clean":
       cargo_exec(project, ["cargo", "clean"])
-    elif cloning:
-      print "cloning " + project
+    elif option == "clone":
       url = "https://github.com/maidsafe/" + project + ".git"
       subprocess.call(["git", "clone", url])
-    else:
-      print "building and testing " + project
+    elif option == "build" or option == "test":
       mock_routing = project in mock_routing_projects
-      cargo_test(project, use_mock_routing=mock_routing)
+      cargo_build_or_test(project, option, use_mock_routing=mock_routing)
 
 # Check for a few simple command line args.
-cleaning = len(sys.argv) >= 2 and sys.argv[1] == "clean"
-cloning = len(sys.argv) >= 2 and sys.argv[1] == "clone"
-do_runner(cleaning, cloning)
+if len(sys.argv) != 2:
+  print "Please specify one of: build, test, clean, clone"
+else: 
+  do_runner(sys.argv[1])
 
