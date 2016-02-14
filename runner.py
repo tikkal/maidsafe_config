@@ -44,19 +44,21 @@ def do_runner(option):
     "safe_launcher"
   ]
   for project in projects:
-    print option + "ing " + project
-    if option == "clean":
+    print option + " " + project
+    if option == "build" or option == "test":
+      mock_routing = project in mock_routing_projects
+      cargo_build_or_test(project, option, use_mock_routing=mock_routing)
+    elif option == "clean":
       cargo_exec(project, ["cargo", "clean"])
     elif option == "clone":
       url = "https://github.com/maidsafe/" + project + ".git"
       subprocess.call(["git", "clone", url])
-    elif option == "build" or option == "test":
-      mock_routing = project in mock_routing_projects
-      cargo_build_or_test(project, option, use_mock_routing=mock_routing)
+    elif option == "update":
+      cargo_exec(project, ["cargo", "update"])
 
 # Check for a few simple command line args.
 if len(sys.argv) != 2:
-  print "Please specify one of: build, test, clean, clone"
+  print "Please specify one of: build, test, clean, clone, update"
 else: 
   do_runner(sys.argv[1])
 
