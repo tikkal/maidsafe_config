@@ -72,7 +72,7 @@ def do_runner(options):
       mock_routing = project in mock_routing_projects
       cargo_build_or_test(project, options, use_mock_routing=mock_routing)
   
-def run_env_checks():
+def check_env():
   print "Running environment checks."
   ret = True
 
@@ -98,7 +98,7 @@ def run_env_checks():
 options = ["build", "clean", "clone", "pull", "test", "update"]
 if len(sys.argv) < 2:
   print "Please specify at least one of: " + ", ".join(options)
-elif (not run_env_checks()):
+elif not check_env():
   print "Environment checks failed." 
   print "See maidsafe forums for tips on fixing your environment."
 else: 
