@@ -50,6 +50,7 @@ def do_runner(options):
     "xor_name"
   ]
   mock_routing_projects = [
+    "safe_core", 
     "safe_dns",
     "safe_ffi",
     "safe_launcher",
