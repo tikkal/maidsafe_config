@@ -52,6 +52,7 @@ def do_runner(options):
   ]
   mock_routing_projects = [
     "safe_dns",
+    "safe_ffi",
     "safe_launcher"
   ]
   for project in projects:
