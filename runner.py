@@ -40,20 +40,20 @@ def do_runner(options):
     "message_filter",
     "routing",
     "rust-utp",
-    "safe_vault",
+    "safe_core", 
+    "safe_dns",
     "safe_ffi",
     "safe_launcher",
-    "self_encryption",
-    "safe_dns",
-    "safe_launcher",
     "safe_nfs",
-    "safe_core", 
+    "safe_vault",
+    "self_encryption",
     "xor_name"
   ]
   mock_routing_projects = [
     "safe_dns",
     "safe_ffi",
-    "safe_launcher"
+    "safe_launcher",
+    "safe_nfs"
   ]
   for project in projects:
     if "clone" in options:
