@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 # Note, in your .bashrc, put: 
 #  export SODIUM_LIB_DIR=/usr/local/lib
