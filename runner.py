@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 
 # Note, in your .bashrc, put: 
 #  export SODIUM_LIB_DIR=/usr/local/lib
@@ -56,6 +56,10 @@ def do_runner(options):
     "safe_launcher",
     "safe_nfs"
   ]
+  node_projects = [
+    "safe_launcher"
+  ]
+ 
   for project in projects:
     if "clone" in options:
       print "git clone " + project
@@ -64,15 +68,16 @@ def do_runner(options):
     if "pull" in options:
       print "git pull " + project
       call_with_cwd(project, ["git", "pull"])
-    if "clean" in options:
-      print "cargo clean " + project
-      call_with_cwd(project, ["cargo", "clean"])
-    if "update" in options:
-      print "cargo update " + project
-      call_with_cwd(project, ["cargo", "update"])
-    if "build" in options or "test" in options:
-      mock_routing = project in mock_routing_projects
-      cargo_build_or_test(project, options, use_mock_routing=mock_routing)
+    if project not in node_projects:
+      if "clean" in options:
+        print "cargo clean " + project
+        call_with_cwd(project, ["cargo", "clean"])
+      if "update" in options:
+        print "cargo update " + project
+        call_with_cwd(project, ["cargo", "update"])
+      if "build" in options or "test" in options:
+        mock_routing = project in mock_routing_projects
+        cargo_build_or_test(project, options, use_mock_routing=mock_routing)
   
 def check_env():
   print "Running environment checks."
@@ -105,4 +110,3 @@ elif not check_env():
   print "See maidsafe forums for tips on fixing your environment."
 else: 
   do_runner(sys.argv)
-
