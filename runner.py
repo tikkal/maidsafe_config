@@ -38,7 +38,6 @@ def do_runner(options):
     "kademlia_routing_table", 
     "lru_time_cache",
     "maidsafe_utilities",
-    "rfcs",
     "routing",
     "rust_sodium",
     "safe_core", 
