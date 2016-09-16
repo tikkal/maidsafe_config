@@ -32,29 +32,25 @@ def cargo_build_or_test(project, options, use_mock_routing=False):
 def do_runner(options):
   projects = [
     "accumulator",
+    "config_file_handler",
     "crust",
     "drive",
     "kademlia_routing_table", 
     "lru_time_cache",
     "maidsafe_utilities",
-    "message_filter",
+    "rfcs",
     "routing",
-    "rust-utp",
+    "rust_sodium",
     "safe_core", 
-    "safe_dns",
-    "safe_ffi",
+    "safe_examples",
     "safe_launcher",
-    "safe_nfs",
     "safe_vault",
+    "secure_serialisation",
     "self_encryption",
-    "xor_name"
   ]
   mock_routing_projects = [
     "safe_core", 
-    "safe_dns",
-    "safe_ffi",
     "safe_launcher",
-    "safe_nfs"
   ]
   node_projects = [
     "safe_launcher"
