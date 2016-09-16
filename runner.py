@@ -42,7 +42,6 @@ def do_runner(options):
     "routing",
     "rust_sodium",
     "safe_core", 
-    "safe_examples",
     "safe_launcher",
     "safe_vault",
     "secure_serialisation",
